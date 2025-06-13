@@ -56,24 +56,27 @@ class Controller {
     }
     
     private function startSession() {
-        $config = require __DIR__ . '/../config/config.php';
-        
-        session_name($config['session']['name']);
-        session_set_cookie_params([
-            'lifetime' => $config['session']['lifetime'],
-            'path' => $config['session']['path'],
-            'domain' => $config['session']['domain'],
-            'secure' => $config['session']['secure'],
-            'httponly' => $config['session']['httponly'],
-            'samesite' => $config['session']['samesite']
-        ]);
-        
-        session_start();
-        
-        // Regenerate session ID to prevent fixation
-        if (empty($_SESSION['initiated'])) {
-            session_regenerate_id();
-            $_SESSION['initiated'] = true;
+        // Only start a new session if one isn't already active
+        if (session_status() === PHP_SESSION_NONE) {
+            $config = require __DIR__ . '/../config/config.php';
+            
+            session_name($config['session']['name']);
+            session_set_cookie_params([
+                'lifetime' => $config['session']['lifetime'],
+                'path' => $config['session']['path'],
+                'domain' => $config['session']['domain'],
+                'secure' => $config['session']['secure'],
+                'httponly' => $config['session']['httponly'],
+                'samesite' => $config['session']['samesite']
+            ]);
+            
+            session_start();
+            
+            // Regenerate session ID to prevent fixation
+            if (empty($_SESSION['initiated'])) {
+                session_regenerate_id(true);
+                $_SESSION['initiated'] = true;
+            }
         }
     }
     

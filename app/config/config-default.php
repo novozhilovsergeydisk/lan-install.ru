@@ -9,9 +9,9 @@ return [
     
     'database' => [
         'host' => 'localhost',
-        'name' => '',
-        'user' => '',
-        'pass' => '',
+        'name' => 'lan_install',
+        'user' => 'postgres',
+        'pass' => 'postgres',
     ],
     
     'security' => [

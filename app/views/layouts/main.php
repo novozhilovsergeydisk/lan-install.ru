@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?></title>
+    <title><?php echo $title ?? 'LAN Install'; ?></title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -228,78 +228,7 @@
     <!-- Bootstrap Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
-    
-    <script>
-        $(document).ready(function(){
-            // Initialize datepicker
-            $('#datepicker').datepicker({
-                format: 'dd.mm.yyyy',
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                container: '#datepicker'
-            });
-
-            // Sync datepicker with input field
-            $('#datepicker').on('changeDate', function(e) {
-                $('#dateInput').val(e.format('dd.mm.yyyy'));
-                $('#selectedDate').text(e.format('dd.mm.yyyy'));
-            });
-
-            // Initialize input field datepicker
-            $('#dateInput').datepicker({
-                format: 'dd.mm.yyyy',
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                container: '#datepicker'
-            });
-
-            // Set today's date on load
-            let today = new Date();
-            let formattedDate = today.toLocaleDateString('ru-RU', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-            $('#datepicker').datepicker('update', today);
-            $('#dateInput').val(formattedDate);
-            $('#selectedDate').text(formattedDate);
-            
-            // Theme toggle functionality
-            const themeToggle = document.getElementById('themeToggle');
-            const sunIcon = document.getElementById('sunIcon');
-            const moonIcon = document.getElementById('moonIcon');
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            const currentTheme = localStorage.getItem('theme');
-            
-            // Check for saved theme preference or use system preference
-            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-                document.documentElement.setAttribute('data-bs-theme', 'dark');
-                sunIcon.classList.remove('d-none');  // Show sun in dark mode
-                moonIcon.classList.add('d-none');
-            } else {
-                document.documentElement.setAttribute('data-bs-theme', 'light');
-                sunIcon.classList.add('d-none');
-                moonIcon.classList.remove('d-none');  // Show moon in light mode
-            }
-            
-            // Toggle theme on icon click
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-                if (currentTheme === 'dark') {
-                    document.documentElement.setAttribute('data-bs-theme', 'light');
-                    localStorage.setItem('theme', 'light');
-                    sunIcon.classList.add('d-none');
-                    moonIcon.classList.remove('d-none');  // Show moon in light mode
-                } else {
-                    document.documentElement.setAttribute('data-bs-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                    sunIcon.classList.remove('d-none');  // Show sun in dark mode
-                    moonIcon.classList.add('d-none');
-                }
-            });
-        });
-    </script>
+    <!-- Custom JS -->
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>

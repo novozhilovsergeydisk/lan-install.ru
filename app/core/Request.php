@@ -16,7 +16,8 @@ class Request {
     }
     
     public function getIp() {
-        $ip = $_SERVER['REMOTE_ADDR'];
+        // Default to localhost IP if REMOTE_ADDR is not set
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
         
         // Check for forwarded IP (behind proxy)
         if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -24,7 +25,7 @@ class Request {
             $ip = trim($ips[0]);
         }
         
-        return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : '0.0.0.0';
+        return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : '127.0.0.1';
     }
     
     public function isAjax() {
