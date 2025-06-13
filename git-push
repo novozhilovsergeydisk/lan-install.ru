@@ -3,5 +3,6 @@
 git pull
 git st
 git add-all
+git st
 git ci -m "Change files"
 git push-all
