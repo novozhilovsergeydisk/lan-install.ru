@@ -9,10 +9,9 @@ return [
     
     'database' => [
         'host' => 'localhost',
-        'name' => 'lan_install_db',
-        'user' => 'db_user',
-        'pass' => 'secure_password',
-        'charset' => 'utf8mb4',
+        'name' => '',
+        'user' => '',
+        'pass' => '',
     ],
     
     'security' => [

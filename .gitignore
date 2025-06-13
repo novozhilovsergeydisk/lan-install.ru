@@ -1,0 +1,6 @@
+restore_db.sh
+app/logs/*.log
+fursa_prod.dump
+.env
+app/config/config.php
+install.sh
